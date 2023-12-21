@@ -19,7 +19,12 @@ df = pd.DataFrame([
     dict(Name="Margaret Johnston", Loc="Michigantown, IN", Start='1833', Finish='1840', Admin='Jackson Administration,Van Buren Administration'),
     dict(Name="Margaret M. Reid", Loc="Cotocton, MD", Start='1833', Finish='1836', Admin='Jackson Administration,Jackson Administration'),
     dict(Name="Mary Odenheimer Deshong", Loc="Chester, PA", Start='1829', Finish='1840', Admin='Jackson Administration,Van Buren Administration'),
-    dict(Name="Mary Dickson", Loc="Lancaster, PA", Start='1829', Finish='1852', Admin='Jackson Administration,Taylor / Fillmore Administration'),
+    #dict(Name="Mary Dickson", Loc="Lancaster, PA", Start='1829', Finish='1852', Admin='Jackson Administration,Taylor / Fillmore Administration'),
+    dict(Name="Mary Dickson", Loc="Lancaster, PA", Start='1829', Finish='1837', Admin='Jackson Administration'),
+    dict(Name="Mary Dickson", Loc="Lancaster, PA", Start='1837', Finish='1841', Admin='Van Buren Administration'),
+    dict(Name="Mary Dickson", Loc="Lancaster, PA", Start='1841', Finish='1845', Admin='Harrison/Tyler Administration'),
+    dict(Name="Mary Dickson", Loc="Lancaster, PA", Start='1845', Finish='1849', Admin='Polk Administration'),
+    dict(Name="Mary Dickson", Loc="Lancaster, PA", Start='1849', Finish='1853', Admin='Taylor/Fillmore Administration'),
     dict(Name="Mary M. Hayes", Loc="Hayesville, NC", Start='1833', Finish='1844', Admin='Jackson Administration,Harrison / Tyler Administration'),
     dict(Name="Mary McKain", Loc="High Rock, NC", Start='1833', Finish='1836', Admin='Jackson Administration,Jackson Administration'),
     dict(Name="Rebecca Jewett Gay", Loc="Washington Hollow, NY", Start='1833', Finish='1836', Admin='Jackson Administration,Jackson Administration'),
@@ -35,7 +40,7 @@ df2 = pd.DataFrame([
     dict(Name="Harrison/Tyler Administration", Start='1842', Finish='1845'),
     dict(Name="Polk Administration", Start='1845', Finish='1848'),
     dict(Name="Taylor Administration", Start='1849', Finish='1850'),
-    dict(Name="Fillmore Administration", Start='1851', Finish='1850')
+    dict(Name="Fillmore Administration", Start='1851', Finish='1852')
 ])
 
 fig = px.timeline(df, x_start="Start", x_end="Finish", y="Name", color="Admin")
