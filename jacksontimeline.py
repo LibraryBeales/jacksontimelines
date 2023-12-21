@@ -61,3 +61,5 @@ fig.show()
 
 #https://stackoverflow.com/questions/64204353/plotly-how-to-highlight-certain-periods-in-a-pandas-time-series-with-rectangle
 #https://stackoverflow.com/questions/63559119/how-to-specify-color-for-elements-in-plotly-gannt-chart
+#https://stackoverflow.com/questions/65910725/plotly-bar-chart-opacity-changes-with-longer-time-range
+#https://stackoverflow.com/questions/67964550/add-custom-markers-to-gantt-chart-in-plotly
