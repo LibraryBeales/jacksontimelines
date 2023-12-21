@@ -38,6 +38,9 @@ df2 = pd.DataFrame([
     dict(Name="Fillmore Administration", Start='1851', Finish='1850')
 ])
 
+fig = px.timeline(df, x_start="Start", x_end="Finish", y="Name", color="Admin")
+
+'''
 fig = make_subplots(specs=[[{"secondary_y": True}]])
 
 fig.add_trace(
@@ -46,7 +49,10 @@ fig.add_trace(
       
 fig.add_trace(
     px.timeline(df2, x_start="Start", x_end="Finish", y="Name", color="Name"))
-
+'''
 
 fig.update_yaxes(autorange="reversed")
 fig.show()
+
+#https://stackoverflow.com/questions/64204353/plotly-how-to-highlight-certain-periods-in-a-pandas-time-series-with-rectangle
+#https://stackoverflow.com/questions/63559119/how-to-specify-color-for-elements-in-plotly-gannt-chart
