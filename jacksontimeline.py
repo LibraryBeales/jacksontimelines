@@ -45,7 +45,7 @@ fig.add_trace(
         
 fig.add_trace(
     go.timeline(df2, x_start="Start", x_end="Finish", y="Name", color="Name"))
-)
+
 
 fig.update_yaxes(autorange="reversed")
 fig.show()
