@@ -29,7 +29,7 @@ df = pd.DataFrame([
     dict(Name="Sarah Pryor", Loc="Pryors Vale, VA", Start='1833', Finish='1840', Admin='Jackson Administration,Van Buren Administration')
 ])
 
-df = pd.DataFrame([
+df2 = pd.DataFrame([
     dict(Name="Jackson Administration", Start='1829', Finish='1837'),
     dict(Name="Van Buren Administration", Start='1838', Finish='1841'),
     dict(Name="Harrison/Tyler Administration", Start='1842', Finish='1845'),
@@ -43,7 +43,7 @@ fig = make_subplots(specs=[[{"secondary_y": True}]])
 fig.add_trace(
     px.timeline(df, x_start="Start", x_end="Finish", y="Name", color="Admin")
 )
-        
+      
 fig.add_trace(
     px.timeline(df2, x_start="Start", x_end="Finish", y="Name", color="Name"))
 
