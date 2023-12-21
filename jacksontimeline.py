@@ -41,11 +41,11 @@ df = pd.DataFrame([
 fig = make_subplots(specs=[[{"secondary_y": True}]])
 
 fig.add_trace(
-    go.timeline(df, x_start="Start", x_end="Finish", y="Name", color="Admin")
+    px.timeline(df, x_start="Start", x_end="Finish", y="Name", color="Admin")
 )
         
 fig.add_trace(
-    go.timeline(df2, x_start="Start", x_end="Finish", y="Name", color="Name"))
+    px.timeline(df2, x_start="Start", x_end="Finish", y="Name", color="Name"))
 
 
 fig.update_yaxes(autorange="reversed")
