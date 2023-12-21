@@ -1,4 +1,5 @@
 import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
 
 df = pd.DataFrame([
@@ -27,6 +28,24 @@ df = pd.DataFrame([
     dict(Name="Sarah Pryor", Loc="Pryors Vale, VA", Start='1833', Finish='1840', Admin='Jackson Administration,Van Buren Administration')
 ])
 
-fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task", color="Resource")
+df = pd.DataFrame([
+    dict(Name="Jackson Administration", Start='1829', Finish='1837'),
+    dict(Name="Van Buren Administration", Start='1838', Finish='1841'),
+    dict(Name="Harrison/Tyler Administration", Start='1842', Finish='1845')
+    dict(Name="Polk Administration", Start='1845', Finish='1848')
+    dict(Name="Taylor Administration", Start='1849', Finish='1850')
+    dict(Name="Fillmore Administration", Start='1851', Finish='1850')
+])
+
+fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+fig.add_trace(
+    go.timeline(df, x_start="Start", x_end="Finish", y="Name", color="Admin")
+)
+        
+fig.add_trace(
+    go.timeline(df2, x_start="Start", x_end="Finish", y="Name", color="Name"))
+)
+
 fig.update_yaxes(autorange="reversed")
 fig.show()
