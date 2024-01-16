@@ -1,5 +1,8 @@
-import url
-import requests
+import pandas as pd
+from geopy.geocoders import Nominatim
+import folium
+
+geolocator = Nominatim(timeout=10, user_agent="PDS")
 
 
 df = pd.DataFrame([
@@ -27,3 +30,7 @@ df = pd.DataFrame([
     dict(Name="Sarah Davis", Loc="Paoli, PA", Start='1833', Finish='1848', Admin='Jackson Administration,Polk Administration'),
     dict(Name="Sarah Pryor", Loc="Pryors Vale, VA", Start='1833', Finish='1840', Admin='Jackson Administration,Van Buren Administration')
 ])
+
+df['Geocode'] = df['Loc'].apply(geolocator.geocode)
+
+
