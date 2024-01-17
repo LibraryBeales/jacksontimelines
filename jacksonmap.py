@@ -1,6 +1,8 @@
 import pandas as pd
 from geopy.geocoders import Nominatim
-import folium
+import geopandas as gpd
+from shapely.geometry import Point, Polygon
+import matplotlib.pyplot as plt
 
 geolocator = Nominatim(timeout=10, user_agent="PDS")
 
@@ -31,6 +33,37 @@ df = pd.DataFrame([
     dict(Name="Sarah Pryor", Loc="Pryors Vale, VA", Start='1833', Finish='1840', Admin='Jackson Administration,Van Buren Administration')
 ])
 
-df['Geocode'] = df['Loc'].apply(geolocator.geocode)
+df['geocode'] = df['Loc'].apply(geolocator.geocode)
+
+df = df.dropna(how='any',axis=0) 
+
+print(df)
 
 
+df['latitude'] = [g.latitude for g in df.geocode]
+df['longitude'] = [g.longitude for g in df.geocode]
+
+print(df)
+
+
+street_map = gpd.read_file('shp/cb_2018_us_state_5m.shp')
+
+crs = {'init':'espg:4326'}
+geometry = [Point(xy) for xy in zip(df['longitude'], df['latitude'])]
+
+geo_df = gpd.GeoDataFrame(df, geometry = geometry)
+
+fig, ax = plt.subplots(figsize=(15,15))
+street_map.plot(ax=ax, alpha=0.3,color='grey')
+                
+geo_df.plot(ax=ax, alpha=0.5, legend=True,markersize=10)
+
+for idx, row in df.iterrows():   
+    plt.annotate(s=row['name'], xy=row['coords'], horizontalalignment='center', color='black')
+
+plt.title('Postmaster Positions', fontsize=15,fontweight='bold')
+          
+plt.xlim(-90.284, -68.787)
+plt.ylim(32.612, 43.368)
+
+plt.show()
