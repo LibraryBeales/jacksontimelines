@@ -1,5 +1,9 @@
 import plotly.express as px
-import plotly.graph_objects as go
+import plotly.figure_factory as ff
+import plotly.graph_objs as go
+import chart_studio
+import chart_studio.plotly as py 
+import chart_studio.tools as tls
 import pandas as pd
 from plotly.subplots import make_subplots
 
@@ -93,9 +97,20 @@ df2 = pd.DataFrame([
     dict(Name="Fillmore Administration", Start='1851', Finish='1852')
 ])
 
-fig = px.timeline(df_new, x_start="Start", x_end="Finish", y="Name", color="Admin")
+fig = px.timeline(df_new, x_start="Start", x_end="Finish", y="Name", color_discrete_sequence=px.colors.qualitative.Prism
+                  , opacity=.7
+#                   , text="Task"
+                  , range_x=None
+                  , range_y=None
+                  , template='plotly_white'
+                  , height=1200
+#                   , width=1500
+                  , color='Dimension'
+                  , title ="<b>IE 3.0 Gantt Chart 2021</b>"
+#                   , color=colors
+)
 
-'''
+
 fig = make_subplots(specs=[[{"secondary_y": True}]])
 
 fig.add_trace(
@@ -104,11 +119,13 @@ fig.add_trace(
       
 fig.add_trace(
     px.timeline(df2, x_start="Start", x_end="Finish", y="Name", color="Name"))
-'''
+
 
 fig.update_yaxes(autorange="reversed")
 fig.show()
 
+#https://blog.devgenius.io/gantt-charts-in-python-with-plotly-e7213f932f1e  https://github.com/maxwellbade/plotly_gantt_chart/blob/main/diagrams%20(1).ipynb
+#https://www.datacamp.com/tutorial/making-map-in-python-using-plotly-library-guide
 #https://stackoverflow.com/questions/64204353/plotly-how-to-highlight-certain-periods-in-a-pandas-time-series-with-rectangle
 #https://stackoverflow.com/questions/63559119/how-to-specify-color-for-elements-in-plotly-gannt-chart
 #https://stackoverflow.com/questions/65910725/plotly-bar-chart-opacity-changes-with-longer-time-range
