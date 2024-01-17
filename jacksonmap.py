@@ -3,6 +3,8 @@ from geopy.geocoders import Nominatim
 import geopandas as gpd
 from shapely.geometry import Point, Polygon
 import matplotlib.pyplot as plt
+import folium
+import webbrowser
 
 geolocator = Nominatim(timeout=10, user_agent="PDS")
 
@@ -35,6 +37,9 @@ df = pd.DataFrame([
 
 df['geocode'] = df['Loc'].apply(geolocator.geocode)
 
+
+print(df)
+
 df = df.dropna(how='any',axis=0) 
 
 print(df)
@@ -58,12 +63,18 @@ street_map.plot(ax=ax, alpha=0.3,color='grey')
                 
 geo_df.plot(ax=ax, alpha=0.5, legend=True,markersize=10)
 
-for idx, row in df.iterrows():   
-    plt.annotate(s=row['name'], xy=row['coords'], horizontalalignment='center', color='black')
-
 plt.title('Postmaster Positions', fontsize=15,fontweight='bold')
           
 plt.xlim(-90.284, -68.787)
 plt.ylim(32.612, 43.368)
 
 plt.show()
+
+po_map = folium.Map(location=(37.7, -82.22), zoom_start=10)
+for index,row in df.iterrows(): 
+  folium.Marker(location=(row['latitude'], 
+                          row['longitude']), 
+                popup=row['Name']).add_to(po_map)
+
+po_map.save("map.html")
+webbrowser.open("map.html")
