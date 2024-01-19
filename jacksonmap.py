@@ -3,8 +3,9 @@ from geopy.geocoders import Nominatim
 import geopandas as gpd
 from shapely.geometry import Point, Polygon
 import matplotlib.pyplot as plt
-import folium
+#import folium
 import webbrowser
+import plotly.express as px
 
 geolocator = Nominatim(timeout=10, user_agent="PDS")
 
@@ -48,9 +49,19 @@ print(df)
 df['latitude'] = [g.latitude for g in df.geocode]
 df['longitude'] = [g.longitude for g in df.geocode]
 
+df['name_loc'] = df['Name'] + ' - ' + df['Loc']
+
 print(df)
 
+fig = px.scatter_geo(df, lat='latitude', lon='longitude', color='Start',
+                     text = 'name_loc', #size='mag',
+                     title='Postmasters')
 
+fig.update_traces(textposition='middle right')
+fig.show()
+
+
+'''
 street_map = gpd.read_file('shp/cb_2018_us_state_5m.shp')
 
 crs = {'init':'espg:4326'}
@@ -77,4 +88,4 @@ for index,row in df.iterrows():
                 popup=row['Name']).add_to(po_map)
 
 po_map.save("map.html")
-webbrowser.open("map.html")
+webbrowser.open("map.html")'''
