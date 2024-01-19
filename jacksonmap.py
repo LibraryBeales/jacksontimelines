@@ -53,15 +53,33 @@ df['name_loc'] = df['Name'] + ' - ' + df['Loc']
 
 print(df)
 
+import csv
+
+df.to_csv('jacksontimeline.csv', index=False)
+'''
+# open the file in the write mode
+with open('jackson.csv', 'w') as f:
+    # create the csv writer
+    writer = csv.writer(f)
+    writer.writerows(df)
+
+
 fig = px.scatter_geo(df, lat='latitude', lon='longitude', color='Start',
                      text = 'name_loc', #size='mag',
                      title='Postmasters')
 
-fig.update_traces(textposition='middle right')
+#fig.update_traces(textposition='middle right')
+
+def improve_text_position(name_loc):
+    """ it is more efficient if the x values are sorted """
+    positions = ['top center', 'bottom center']  # you can add more: left center ...
+    return [positions[i % len(positions)] for i in range(len(name_loc))]
+    
+fig.update_traces(textposition=improve_text_position(df['name_loc']))
+
 fig.show()
 
 
-'''
 street_map = gpd.read_file('shp/cb_2018_us_state_5m.shp')
 
 crs = {'init':'espg:4326'}
